@@ -1,0 +1,81 @@
+client:
+  name: basic
+  file-system: device-agnostic
+tools: {}
+targets:
+  "ConceptMCP-arm64-apple-macosx15.0-debug.exe": ["<ConceptMCP-arm64-apple-macosx15.0-debug.exe>"]
+  "ConceptMCP-arm64-apple-macosx15.0-debug.module": ["<ConceptMCP-arm64-apple-macosx15.0-debug.module>"]
+  "PackageStructure": ["<PackageStructure>"]
+  "main": ["<ConceptMCP-arm64-apple-macosx15.0-debug.exe>","<ConceptMCP-arm64-apple-macosx15.0-debug.module>"]
+  "test": ["<ConceptMCP-arm64-apple-macosx15.0-debug.exe>","<ConceptMCP-arm64-apple-macosx15.0-debug.module>"]
+default: "main"
+nodes:
+  "/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/":
+    is-directory-structure: true
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP":
+    is-mutated: true
+commands:
+  "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP-entitlement.plist":
+    tool: write-auxiliary-file
+    inputs: ["<entitlement-plist>","<com.apple.security.get-task-allow>"]
+    outputs: ["/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP-entitlement.plist"]
+    description: "Write auxiliary file /Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP-entitlement.plist"
+
+  "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/sources":
+    tool: write-auxiliary-file
+    inputs: ["<sources-file-list>","/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/CMParser.swift","/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/Handlers.swift","/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/MCPProtocol.swift","/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/Tools.swift","/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/main.swift"]
+    outputs: ["/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/sources"]
+    description: "Write auxiliary file /Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/sources"
+
+  "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.product/Objects.LinkFileList":
+    tool: write-auxiliary-file
+    inputs: ["<link-file-list>","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/CMParser.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/Handlers.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/MCPProtocol.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/Tools.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/main.swift.o"]
+    outputs: ["/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.product/Objects.LinkFileList"
+
+  "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt":
+    tool: write-auxiliary-file
+    inputs: ["<swift-get-version>","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"]
+    outputs: ["/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"]
+    always-out-of-date: "true"
+    description: "Write auxiliary file /Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt"
+
+  "<ConceptMCP-arm64-apple-macosx15.0-debug.exe>":
+    tool: phony
+    inputs: ["<ConceptMCP-arm64-apple-macosx15.0-debug.exe-CodeSigning>"]
+    outputs: ["<ConceptMCP-arm64-apple-macosx15.0-debug.exe>"]
+
+  "<ConceptMCP-arm64-apple-macosx15.0-debug.module>":
+    tool: phony
+    inputs: ["/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/CMParser.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/Handlers.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/MCPProtocol.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/Tools.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/main.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/Modules/ConceptMCP.swiftmodule"]
+    outputs: ["<ConceptMCP-arm64-apple-macosx15.0-debug.module>"]
+
+  "C.ConceptMCP-arm64-apple-macosx15.0-debug.exe":
+    tool: shell
+    inputs: ["/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/CMParser.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/Handlers.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/MCPProtocol.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/Tools.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/main.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.product/Objects.LinkFileList"]
+    outputs: ["/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP"]
+    description: "Linking ./.build/arm64-apple-macosx/debug/ConceptMCP"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-L","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug","-o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP","-module-name","ConceptMCP","-Xlinker","-no_warn_duplicate_libraries","-emit-executable","-Xlinker","-alias","-Xlinker","_ConceptMCP_main","-Xlinker","_main","-Xlinker","-rpath","-Xlinker","@loader_path","@/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-6.2/macosx","-target","arm64-apple-macosx14.0","-Xlinker","-add_ast_path","-Xlinker","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/Modules/ConceptMCP.swiftmodule","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g"]
+
+  "C.ConceptMCP-arm64-apple-macosx15.0-debug.exe-entitlements":
+    tool: shell
+    inputs: ["/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP-entitlement.plist"]
+    outputs: ["<ConceptMCP-arm64-apple-macosx15.0-debug.exe-CodeSigning>"]
+    description: "Applying debug entitlements to ./.build/arm64-apple-macosx/debug/ConceptMCP"
+    args: ["codesign","--force","--sign","-","--entitlements","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP-entitlement.plist","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP"]
+
+  "C.ConceptMCP-arm64-apple-macosx15.0-debug.module":
+    tool: shell
+    inputs: ["/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/CMParser.swift","/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/Handlers.swift","/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/MCPProtocol.swift","/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/Tools.swift","/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/main.swift","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/swift-version--58304C5D6DBC2206.txt","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/sources"]
+    outputs: ["/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/CMParser.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/Handlers.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/MCPProtocol.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/Tools.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/main.swift.o","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/Modules/ConceptMCP.swiftmodule"]
+    description: "Compiling Swift Module 'ConceptMCP' (5 sources)"
+    args: ["/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc","-module-name","ConceptMCP","-emit-dependencies","-emit-module","-emit-module-path","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/Modules/ConceptMCP.swiftmodule","-output-file-map","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/output-file-map.json","-incremental","-c","@/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ConceptMCP.build/sources","-I","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx14.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j12","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","ConceptMCP_main","-swift-version","5","-plugin-path","/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing","-sdk","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-F","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-I","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-L","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib","-g","-Xcc","-isysroot","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks","-Xcc","-F","-Xcc","/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/PrivateFrameworks","-Xcc","-fPIC","-Xcc","-g","-package-name","mcp_server"]
+
+  "PackageStructure":
+    tool: package-structure-tool
+    inputs: ["/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/","/Users/dromologue/code/concept-mapper/mcp-server/Package.swift","/Users/dromologue/code/concept-mapper/mcp-server/Package.resolved"]
+    outputs: ["<PackageStructure>"]
+    description: "Planning build"
+    allow-missing-inputs: true
+

@@ -1,0 +1,37 @@
+{
+  "": {
+    "dependencies": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/ConceptMCP.d",
+    "object": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/ConceptMCP.o",
+    "swift-dependencies": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/master.swiftdeps"
+  },
+  "/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/CMParser.swift": {
+    "object": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/CMParser.swift.o",
+    "swiftmodule": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/CMParser~partial.swiftmodule",
+    "swift-dependencies": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/CMParser.swiftdeps",
+    "diagnostics": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/CMParser.dia"
+  },
+  "/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/Handlers.swift": {
+    "object": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/Handlers.swift.o",
+    "swiftmodule": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/Handlers~partial.swiftmodule",
+    "swift-dependencies": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/Handlers.swiftdeps",
+    "diagnostics": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/Handlers.dia"
+  },
+  "/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/MCPProtocol.swift": {
+    "object": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/MCPProtocol.swift.o",
+    "swiftmodule": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/MCPProtocol~partial.swiftmodule",
+    "swift-dependencies": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/MCPProtocol.swiftdeps",
+    "diagnostics": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/MCPProtocol.dia"
+  },
+  "/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/Tools.swift": {
+    "object": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/Tools.swift.o",
+    "swiftmodule": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/Tools~partial.swiftmodule",
+    "swift-dependencies": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/Tools.swiftdeps",
+    "diagnostics": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/Tools.dia"
+  },
+  "/Users/dromologue/code/concept-mapper/mcp-server/Sources/ConceptMCP/main.swift": {
+    "object": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/main.swift.o",
+    "swiftmodule": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/main.swiftdeps",
+    "diagnostics": "/Users/dromologue/code/concept-mapper/mcp-server/.build/arm64-apple-macosx/release/ConceptMCP.build/main.dia"
+  }
+}
