@@ -4,6 +4,22 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Resources/AppIcon.icns</key>
+		<data>
+		IU0Nq/59mgsBo+NlZoSaEJUgLD8=
+		</data>
+		<key>Resources/Assets.car</key>
+		<data>
+		t2dfxpSjaQCjWizZRw3/bT1HEXg=
+		</data>
+		<key>Resources/templates/intellectual-history.cmt</key>
+		<data>
+		FpN35g7DyAtAbGAuhnSqdndL4zo=
+		</data>
+		<key>Resources/templates/task-management.cmt</key>
+		<data>
+		KfBpCUHEUXn3saJujPUZQuq22Xk=
+		</data>
 		<key>Resources/web/assets/concept_mapper_core-DukmLv8Y.js</key>
 		<data>
 		vMh24P5e863kvAqq8y7qtCAEAbA=
@@ -12,85 +28,13 @@
 		<data>
 		OyuO3x2jotop6C2s7rK6JfUBuCg=
 		</data>
-		<key>Resources/web/assets/index-3Zr2OIXy.js</key>
+		<key>Resources/web/assets/index-BIqntVAO.css</key>
 		<data>
-		RmFBl1WT6nQEjsG8UqbjaQQ0UVo=
+		5g7QU3nGFVt7UDufJjiotu6Y+vI=
 		</data>
-		<key>Resources/web/assets/index-BLJIMApq.js</key>
+		<key>Resources/web/assets/index-BS-1ca8H.js</key>
 		<data>
-		qzNLS64VVI+o7G5BSuYcvC9nSo4=
-		</data>
-		<key>Resources/web/assets/index-BUcO7QFt.js</key>
-		<data>
-		Z3s8B4VV6McbGF3sZsi75tUfRkg=
-		</data>
-		<key>Resources/web/assets/index-BgorQ1Dw.css</key>
-		<data>
-		5U7Xkv7x4nWq/TPpELr45UM16ys=
-		</data>
-		<key>Resources/web/assets/index-BuOenpcS.js</key>
-		<data>
-		oblnGHGuaCJhJdkRSfNvA5B0YZk=
-		</data>
-		<key>Resources/web/assets/index-Bxx8gpgw.css</key>
-		<data>
-		wawSoxyO+Besp03eRch2iaHqivc=
-		</data>
-		<key>Resources/web/assets/index-C3j3rMzs.css</key>
-		<data>
-		q9ivFwZTUcZYS3gJWuCQk5yb6cM=
-		</data>
-		<key>Resources/web/assets/index-C43ZALYK.js</key>
-		<data>
-		B0iSrvjvF0TOWM81QuzvuYgl3ec=
-		</data>
-		<key>Resources/web/assets/index-CGpcfzFE.js</key>
-		<data>
-		dJ31F9c0MMTKDLKyWbeFSSui+pc=
-		</data>
-		<key>Resources/web/assets/index-CIA0Xc9C.js</key>
-		<data>
-		AegCF47NKT4U0+q8fs7RnuPYnnk=
-		</data>
-		<key>Resources/web/assets/index-COUTgdFF.js</key>
-		<data>
-		rCJv/9lk9FmoSmZxb2oC/UbEgjg=
-		</data>
-		<key>Resources/web/assets/index-CStuEtUY.js</key>
-		<data>
-		fyuz8q0kdfQzJWeWcTDTphvSLFU=
-		</data>
-		<key>Resources/web/assets/index-CSyy_0y0.js</key>
-		<data>
-		Sfh7Rnh36tKOBZaruqrZZlvxVb0=
-		</data>
-		<key>Resources/web/assets/index-CX7XtXLx.js</key>
-		<data>
-		7UbHRXGKhmr8bIvs7HCh3a3T0ak=
-		</data>
-		<key>Resources/web/assets/index-D3BbPGJY.js</key>
-		<data>
-		zro90k8dLLaXMWGOeZ6FRNUMbFE=
-		</data>
-		<key>Resources/web/assets/index-DaU9O97x.js</key>
-		<data>
-		DuvFJrPTDqWrgHtmQ6FoH+0qusY=
-		</data>
-		<key>Resources/web/assets/index-DnTUPWKX.js</key>
-		<data>
-		vnTxBMKGPLoDKEJ86Blz/3cABQo=
-		</data>
-		<key>Resources/web/assets/index-Zqps8qG4.css</key>
-		<data>
-		AHKvCra52X+i0MymdZ1D7A07t+g=
-		</data>
-		<key>Resources/web/assets/index-r4E6V9it.css</key>
-		<data>
-		FgpkR+w/sBmbkEwWNbB8Q8zwZQ0=
-		</data>
-		<key>Resources/web/assets/index-rgPZx5UO.css</key>
-		<data>
-		4nt6Hr4NzKpXeYgv0Zvd9+Posw0=
+		kBfDXY6sA89RSc7IX/C98rdB6hI=
 		</data>
 		<key>Resources/web/favicon.svg</key>
 		<data>
@@ -102,7 +46,7 @@
 		</data>
 		<key>Resources/web/index.html</key>
 		<data>
-		w5gEKHYOdsZ4qbXbeU2xQ86o4bw=
+		3oI6WIJx9KciEduzR6xVq6ooD9M=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -111,10 +55,10 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			GPKtqDR8xxZdYaX+18FNBymeta8=
+			cf3tvJOxrKeXfZwThh2aBJEfVTY=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"18f2ada8347cc7165d61a5fed7c14d07299eb5af"</string>
+			<string>cdhash H"71fdedbc93b1aca7977d9c13861d9a04911f5536"</string>
 		</dict>
 		<key>MacOS/__preview.dylib</key>
 		<dict>
@@ -124,6 +68,34 @@
 			</data>
 			<key>requirement</key>
 			<string>cdhash H"21f05f31ace6f9ae2f1ad89f6d0094e523acf686"</string>
+		</dict>
+		<key>Resources/AppIcon.icns</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			iua6jcT8sf88jlUc97u128Z8z1USvVBNsz97Kv4iAco=
+			</data>
+		</dict>
+		<key>Resources/Assets.car</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			RbmBIZ7hJ6q9AD9hnLScE/sxJP8suBcA8iyvoZBJbIA=
+			</data>
+		</dict>
+		<key>Resources/templates/intellectual-history.cmt</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			EuXrZVuKv2vR3Dz3hH+WsxPildO4OLsyX0O3TidmWL8=
+			</data>
+		</dict>
+		<key>Resources/templates/task-management.cmt</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			0DrDWYhrJfqzYEtsFuHW1M9D5hneSmU/8CMDFnbtzU8=
+			</data>
 		</dict>
 		<key>Resources/web/assets/concept_mapper_core-DukmLv8Y.js</key>
 		<dict>
@@ -139,144 +111,18 @@
 			bkStpG36+vP98ux6mwqf/1+fsYHnfJSIgoi+aL5a3Ls=
 			</data>
 		</dict>
-		<key>Resources/web/assets/index-3Zr2OIXy.js</key>
+		<key>Resources/web/assets/index-BIqntVAO.css</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cFs86z5r9dKKajV7lZIzTDaUutGgbATkeq4sfC8kbGw=
+			v95ywIc4dEFc6D0A2wOjnRc5D+La5Lqlu6vQcu2v5JA=
 			</data>
 		</dict>
-		<key>Resources/web/assets/index-BLJIMApq.js</key>
+		<key>Resources/web/assets/index-BS-1ca8H.js</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ESjJh6q47ihFq7erTMzVrC9OaUPaaxk1uU20cMy0GXc=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-BUcO7QFt.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			GBgARFG0j2U7BN3n3tByGO773alBB+YMN1ptiwhIGv4=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-BgorQ1Dw.css</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			bLHrStBSydeHU/gx3f7spbDrBvCdYe9zU1BLigu7P5M=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-BuOenpcS.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			J128H/oO+yGPBSR9gFea70H5kyIpGeUZCiVUDXO4zB0=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-Bxx8gpgw.css</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			e4z901cge2Lfsh62Txxqvygm9ewIDsWzkEXQwclENPk=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-C3j3rMzs.css</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			NsZunXcaKJPK2ahwmf6A+JdVFUOKNv9Zs6uy+sI5ShE=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-C43ZALYK.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			4oVswhSEQrJ5Rue4pVKhNjCIQLHiHYXBxLG+9K1lJqw=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-CGpcfzFE.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ntVxM0qN7mwJizooUavU0ByhhOVKG07+Db/ifeMxk/s=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-CIA0Xc9C.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ccRl0AyzQ+kjG8fsU68iC/P/af6I3Y9nJ6qJ2neL+eA=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-COUTgdFF.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			dBq34UFDoR1Z+Nptq05Gbn1ZUvs9FWWKIarHzkDxfVU=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-CStuEtUY.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			EbEc/K78qaWLrO8dAPrITHGQEKhGp1caiB5u76/BGAc=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-CSyy_0y0.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			fekxoekLQ8pzcUHCmBSSUB7MfdIdPG8QYWxlSHBdTDI=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-CX7XtXLx.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			pQw4HffE673T5EVADEc9y2HyAcBIBN2YwH9dxM3ln/M=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-D3BbPGJY.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Sd3QJnpT+4xr/C4Rlizp8Fq2r3QEqBx8tXeYTnUm2p8=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-DaU9O97x.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ZIhW54ISmHFhM3ZLr+Vyuhjcj+MqVDg4LyIXc9v3YeI=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-DnTUPWKX.js</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Ib22fXI42iGxyb/SaRfyboMi+lO3YXbf+mWEUaJdirs=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-Zqps8qG4.css</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			J7vvsj/pe5+zTqcLhspHR5O3bWT16M5KcHF86e2V5CA=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-r4E6V9it.css</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			l1u+nnlwfJsQ7yB9sQmeYrBwyIQ5vdj9UYYerZYRkK0=
-			</data>
-		</dict>
-		<key>Resources/web/assets/index-rgPZx5UO.css</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			/G1LDuH8Be1qysW03HbW52draS/ZeF6q3hCz6jrcEB0=
+			oicwBnaSebVhVLSX2loI7pBV9e0YdCMoTH/Bpihjrbc=
 			</data>
 		</dict>
 		<key>Resources/web/favicon.svg</key>
@@ -297,7 +143,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			yM9bfTnbOG/WlGAnVHgl085X8dDoclmzZ8joCGOpGME=
+			02weaKdgufLSgQb15N+odK49nqdCyQcDa1/JoZRDW/U=
 			</data>
 		</dict>
 	</dict>
