@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import type { GraphNode, GraphEdge } from "../types/graph-ir";
 import { EDGE_LABELS } from "../utils/edge-labels";
 
@@ -11,267 +11,130 @@ interface Props {
   style?: React.CSSProperties;
 }
 
-const ZWS = "\u200B"; // zero-width space for empty lines
-
-function escapeHtml(text: string): string {
-  return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+interface OutlineItem {
+  text: string;
+  indent: number; // 0-based indent level
 }
 
-/** Style inline markdown — keeps all syntax characters visible but styled */
-function styleInline(escaped: string): string {
-  escaped = escaped.replace(
-    /\*\*(.+?)\*\*/g,
-    '<span class="md-syn">**</span><strong>$1</strong><span class="md-syn">**</span>'
-  );
-  escaped = escaped.replace(
-    /(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/g,
-    '<span class="md-syn">*</span><em>$1</em><span class="md-syn">*</span>'
-  );
-  escaped = escaped.replace(
-    /`(.+?)`/g,
-    '<span class="md-syn">`</span><code>$1</code><span class="md-syn">`</span>'
-  );
-  return escaped;
-}
-
-/** Render a single line of markdown as styled HTML inside a <div>. */
-function highlightLine(line: string): string {
-  if (line === "") return `<div>${ZWS}</div>`;
-
-  const hMatch = line.match(/^(#{1,4})\s(.*)$/);
-  if (hMatch) {
-    const lvl = hMatch[1].length;
-    return `<div class="md-h${lvl}"><span class="md-syn">${escapeHtml(hMatch[1])}</span> ${styleInline(escapeHtml(hMatch[2]))}</div>`;
-  }
-
-  const liMatch = line.match(/^(\s*[-*])\s(.*)$/);
-  if (liMatch) {
-    return `<div class="md-li"><span class="md-syn">${escapeHtml(liMatch[1])}</span> ${styleInline(escapeHtml(liMatch[2]))}</div>`;
-  }
-
-  if (line.startsWith("> ")) {
-    return `<div class="md-bq"><span class="md-syn">&gt;</span> ${styleInline(escapeHtml(line.slice(2)))}</div>`;
-  }
-
-  return `<div>${styleInline(escapeHtml(line))}</div>`;
-}
-
-function highlightMarkdown(md: string): string {
-  if (!md) return "";
-  return md.split("\n").map(highlightLine).join("");
-}
-
-/** Extract clean markdown from the editor's DOM.
- *  Each top-level child div is one line. We read innerText per-div
- *  to avoid the double-newline issue from contentEditable's block elements. */
-function extractMarkdown(el: HTMLElement): string {
-  const children = el.childNodes;
-  if (children.length === 0) return el.innerText?.replace(/\u200B/g, "") ?? "";
-
-  const lines: string[] = [];
-  for (let i = 0; i < children.length; i++) {
-    const child = children[i];
-    if (child.nodeType === Node.TEXT_NODE) {
-      // Bare text node (before any div is created, e.g. first line)
-      const text = (child.textContent ?? "").replace(/\u200B/g, "");
-      if (text) lines.push(text);
-    } else if (child.nodeType === Node.ELEMENT_NODE) {
-      const el = child as HTMLElement;
-      const tag = el.tagName;
-      if (tag === "BR") {
-        // Trailing <br> that browsers add — ignore unless it's meaningful
-        if (i < children.length - 1) lines.push("");
-      } else {
-        // <div>, <p>, etc. — one line
-        const text = (el.innerText ?? "").replace(/\u200B/g, "");
-        lines.push(text);
-      }
+/** Parse notes string into outline items. Each line is a bullet; leading 2-space groups = indent. */
+function parseOutline(notes: string): OutlineItem[] {
+  if (!notes) return [{ text: "", indent: 0 }];
+  return notes.split("\n").map((line) => {
+    // Count leading "  " pairs OR leading "- " bullet markers
+    let stripped = line;
+    let indent = 0;
+    while (stripped.startsWith("  ")) {
+      indent++;
+      stripped = stripped.slice(2);
     }
-  }
-  return lines.join("\n");
+    // Strip leading bullet marker if present
+    if (stripped.startsWith("- ")) stripped = stripped.slice(2);
+    else if (stripped.startsWith("* ")) stripped = stripped.slice(2);
+    return { text: stripped, indent };
+  });
 }
 
-/** Save cursor as (lineIndex, column) relative to the editor's child divs. */
-function saveCursor(el: HTMLElement): { line: number; col: number } | null {
-  const sel = window.getSelection();
-  if (!sel || sel.rangeCount === 0) return null;
-
-  const range = sel.getRangeAt(0);
-  let container: Node = range.startContainer;
-
-  // Walk up to find which direct child of `el` contains the cursor
-  let lineDiv: Node | null = container;
-  while (lineDiv && lineDiv.parentNode !== el) {
-    lineDiv = lineDiv.parentNode;
-  }
-
-  if (!lineDiv) {
-    // Cursor is in a bare text node directly under el (no div wrapper yet)
-    // This happens on the very first line before Enter is pressed
-    const pre = range.cloneRange();
-    pre.selectNodeContents(el);
-    pre.setEnd(range.startContainer, range.startOffset);
-    return { line: 0, col: pre.toString().length };
-  }
-
-  // Find the line index
-  let line = 0;
-  let sibling: Node | null = el.firstChild;
-  while (sibling && sibling !== lineDiv) {
-    line++;
-    sibling = sibling.nextSibling;
-  }
-
-  // Find column offset within this div
-  const pre = range.cloneRange();
-  pre.selectNodeContents(lineDiv);
-  pre.setEnd(range.startContainer, range.startOffset);
-  const col = pre.toString().length;
-
-  return { line, col };
-}
-
-/** Restore cursor to (lineIndex, column) within the editor's child divs. */
-function restoreCursor(el: HTMLElement, pos: { line: number; col: number }) {
-  const sel = window.getSelection();
-  if (!sel) return;
-
-  const children = el.childNodes;
-  if (children.length === 0) return;
-
-  // Clamp line index
-  const lineIndex = Math.min(pos.line, children.length - 1);
-  const lineNode = children[lineIndex];
-  if (!lineNode) return;
-
-  // Walk text nodes within this line div to find the column offset
-  const targetCol = pos.col;
-  let cur = 0;
-  const walker = document.createTreeWalker(lineNode, NodeFilter.SHOW_TEXT);
-  let textNode: Text | null;
-  while ((textNode = walker.nextNode() as Text | null)) {
-    const text = textNode.textContent ?? "";
-    // Skip zero-width spaces in offset counting
-    const visibleLen = text.replace(/\u200B/g, "").length;
-    if (cur + visibleLen >= targetCol) {
-      // Find the actual offset within this text node accounting for ZWS
-      let actualOffset = 0;
-      let visibleSeen = 0;
-      const needed = targetCol - cur;
-      for (let i = 0; i < text.length; i++) {
-        if (visibleSeen >= needed) break;
-        if (text[i] !== "\u200B") visibleSeen++;
-        actualOffset = i + 1;
-      }
-      const range = document.createRange();
-      range.setStart(textNode, Math.min(actualOffset, text.length));
-      range.collapse(true);
-      sel.removeAllRanges();
-      sel.addRange(range);
-      return;
-    }
-    cur += visibleLen;
-  }
-
-  // Past end — place at end of this line
-  const range = document.createRange();
-  range.selectNodeContents(lineNode);
-  range.collapse(false);
-  sel.removeAllRanges();
-  sel.addRange(range);
+/** Serialize outline items back to notes string. Uses 2-space indentation + "- " prefix. */
+function serializeOutline(items: OutlineItem[]): string {
+  return items.map((item) => "  ".repeat(item.indent) + "- " + item.text).join("\n");
 }
 
 export function NotesPane({ node, edges, nodes, onNodeUpdate }: Props) {
   const nodeMap = new Map(nodes.map((n) => [n.id, n]));
-  const editorRef = useRef<HTMLDivElement>(null);
+  const [items, setItems] = useState<OutlineItem[]>(() => parseOutline(node.notes ?? ""));
+  const [focusedLine, setFocusedLine] = useState(0);
   const saveTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
-  const notesRef = useRef(node.notes ?? "");
-  const isComposingRef = useRef(false);
+  const inputRefs = useRef<Map<number, HTMLInputElement>>(new Map());
 
-  const save = useCallback((text: string) => {
+  // Reset when node changes
+  useEffect(() => {
+    setItems(parseOutline(node.notes ?? ""));
+    setFocusedLine(0);
+  }, [node.id]);
+
+  // Focus the right input when focusedLine changes
+  useEffect(() => {
+    const input = inputRefs.current.get(focusedLine);
+    if (input) input.focus();
+  }, [focusedLine, items.length]);
+
+  const save = useCallback((newItems: OutlineItem[]) => {
     clearTimeout(saveTimerRef.current);
     saveTimerRef.current = setTimeout(() => {
+      const text = serializeOutline(newItems);
       onNodeUpdate(node.id, { notes: text || undefined });
     }, 500);
   }, [node.id, onNodeUpdate]);
 
-  /** Re-render the editor HTML from its current text, preserving cursor. */
-  const rerender = useCallback(() => {
-    const el = editorRef.current;
-    if (!el) return;
-    if (isComposingRef.current) return; // don't disrupt IME
-
-    const md = extractMarkdown(el);
-    notesRef.current = md;
-    const cursor = saveCursor(el);
-    el.innerHTML = highlightMarkdown(md);
-    if (cursor) restoreCursor(el, cursor);
-  }, []);
-
-  // Init / node switch
-  useEffect(() => {
-    notesRef.current = node.notes ?? "";
-    if (editorRef.current) {
-      editorRef.current.innerHTML = highlightMarkdown(node.notes ?? "");
-    }
-  }, [node.id]);
-
-  useEffect(() => { editorRef.current?.focus(); }, []);
-
-  const handleInput = () => {
-    const el = editorRef.current;
-    if (!el) return;
-    if (isComposingRef.current) return;
-
-    // Re-highlight immediately on every input
-    rerender();
-
-    const md = notesRef.current;
-    save(md);
+  const updateItems = (newItems: OutlineItem[]) => {
+    setItems(newItems);
+    save(newItems);
   };
 
-  const handleBlur = () => {
-    rerender();
-    save(notesRef.current);
+  const handleTextChange = (index: number, text: string) => {
+    const newItems = [...items];
+    newItems[index] = { ...newItems[index], text };
+    updateItems(newItems);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      // Prevent browser's default <div><br></div> insertion — it breaks our
-      // line-per-div structure. Instead, manually insert a newline by splitting
-      // the current line at the cursor position.
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    const input = e.currentTarget;
+
+    if (e.key === "Tab") {
       e.preventDefault();
-      const el = editorRef.current;
-      if (!el) return;
-
-      const cursor = saveCursor(el);
-      const md = extractMarkdown(el);
-      if (!cursor) {
-        // Fallback: append newline at end
-        notesRef.current = md + "\n";
-        el.innerHTML = highlightMarkdown(notesRef.current);
-        restoreCursor(el, { line: md.split("\n").length, col: 0 });
-        save(notesRef.current);
-        return;
+      const newItems = [...items];
+      if (e.shiftKey) {
+        // Outdent (min 0)
+        if (newItems[index].indent > 0) {
+          newItems[index] = { ...newItems[index], indent: newItems[index].indent - 1 };
+          updateItems(newItems);
+        }
+      } else {
+        // Indent (max = parent indent + 1)
+        const maxIndent = index > 0 ? newItems[index - 1].indent + 1 : 0;
+        if (newItems[index].indent < maxIndent) {
+          newItems[index] = { ...newItems[index], indent: newItems[index].indent + 1 };
+          updateItems(newItems);
+        }
       }
-
-      // Convert (line, col) to a flat offset, insert \n, re-render
-      const lines = md.split("\n");
-      const lineIdx = Math.min(cursor.line, lines.length - 1);
-      const col = Math.min(cursor.col, lines[lineIdx]?.length ?? 0);
-
-      // Build new text with the newline inserted
-      const before = lines.slice(0, lineIdx).join("\n")
-        + (lineIdx > 0 ? "\n" : "")
-        + lines[lineIdx].slice(0, col);
-      const after = lines[lineIdx].slice(col)
-        + (lineIdx < lines.length - 1 ? "\n" : "")
-        + lines.slice(lineIdx + 1).join("\n");
-
-      notesRef.current = before + "\n" + after;
-      el.innerHTML = highlightMarkdown(notesRef.current);
-      restoreCursor(el, { line: lineIdx + 1, col: 0 });
-      save(notesRef.current);
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      // Split at cursor: text before cursor stays, text after goes to new line
+      const cursorPos = input.selectionStart ?? items[index].text.length;
+      const textBefore = items[index].text.slice(0, cursorPos);
+      const textAfter = items[index].text.slice(cursorPos);
+      const newItems = [...items];
+      newItems[index] = { ...newItems[index], text: textBefore };
+      newItems.splice(index + 1, 0, { text: textAfter, indent: items[index].indent });
+      updateItems(newItems);
+      setFocusedLine(index + 1);
+    } else if (e.key === "Backspace" && input.selectionStart === 0 && input.selectionEnd === 0) {
+      e.preventDefault();
+      if (items[index].indent > 0) {
+        // First outdent
+        const newItems = [...items];
+        newItems[index] = { ...newItems[index], indent: newItems[index].indent - 1 };
+        updateItems(newItems);
+      } else if (index > 0) {
+        // Merge with previous line
+        const newItems = [...items];
+        const prevText = newItems[index - 1].text;
+        newItems[index - 1] = { ...newItems[index - 1], text: prevText + newItems[index].text };
+        newItems.splice(index, 1);
+        updateItems(newItems);
+        setFocusedLine(index - 1);
+        // Set cursor to end of previous text after focus
+        setTimeout(() => {
+          const prevInput = inputRefs.current.get(index - 1);
+          if (prevInput) {
+            prevInput.setSelectionRange(prevText.length, prevText.length);
+          }
+        }, 0);
+      }
+    } else if (e.key === "ArrowUp") {
+      if (index > 0) { e.preventDefault(); setFocusedLine(index - 1); }
+    } else if (e.key === "ArrowDown") {
+      if (index < items.length - 1) { e.preventDefault(); setFocusedLine(index + 1); }
     }
   };
 
@@ -304,18 +167,30 @@ export function NotesPane({ node, edges, nodes, onNodeUpdate }: Props) {
       )}
 
       <div className="notes-content">
-        <div
-          ref={editorRef}
-          className="notes-rendered notes-inline-editor"
-          contentEditable
-          suppressContentEditableWarning
-          onInput={handleInput}
-          onBlur={handleBlur}
-          onKeyDown={handleKeyDown}
-          onCompositionStart={() => { isComposingRef.current = true; }}
-          onCompositionEnd={() => { isComposingRef.current = false; handleInput(); }}
-          spellCheck
-        />
+        <div className="outline-editor">
+          {items.map((item, i) => (
+            <div
+              key={i}
+              className="outline-item"
+              style={{ paddingLeft: item.indent * 20 + 4 }}
+            >
+              <span className="outline-bullet">&#x2022;</span>
+              <input
+                ref={(el) => { if (el) inputRefs.current.set(i, el); else inputRefs.current.delete(i); }}
+                className="outline-input"
+                type="text"
+                value={item.text}
+                onChange={(e) => handleTextChange(i, e.target.value)}
+                onKeyDown={(e) => handleKeyDown(i, e)}
+                onFocus={() => setFocusedLine(i)}
+                placeholder={i === 0 ? "Start typing..." : ""}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="outline-hint">
+          Tab to indent &middot; Shift+Tab to outdent &middot; Enter for new line
+        </div>
       </div>
     </div>
   );
