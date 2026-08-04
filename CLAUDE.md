@@ -2,7 +2,7 @@
 
 ## Tech Stack
 - **Core parser**: Rust 2021 edition, compiles to native + WASM (via wasm-bindgen)
-- **Frontend**: React 19 + TypeScript 5.9, D3.js 7.9 (force-directed layout), Zustand (state), Vite 8
+- **Frontend**: React 19 + TypeScript 6, D3.js 7.9 (force-directed layout), Zustand (state), Vite 8
 - **macOS app**: SwiftUI (ConceptMapper), WKWebView hosts the React SPA
 - **Testing**: `cargo test` (Rust), Vitest (web), GitHub Actions CI
 

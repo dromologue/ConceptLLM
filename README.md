@@ -6,12 +6,14 @@ Concept Mapper is free and open source (MIT), and runs on macOS 14 (Sonoma) or l
 
 ## Install
 
-**Download the app (recommended).** Get the latest notarised build from
+**Download the app (recommended).** Get the latest build from
 **[download.conceptmapper.dromologue.com](https://download.conceptmapper.dromologue.com/ConceptMapper.dmg)**
 (linked from [conceptmapper.dromologue.com](https://conceptmapper.dromologue.com)). Open the
-disk image and drag **ConceptMapper** to your Applications folder. The build is signed with a
-Developer ID certificate and notarised by Apple, so it launches with no security prompt — no
-App Store account required. There is no auto-updater; to update, download the latest DMG and
+disk image and drag **ConceptMapper** to your Applications folder — no App Store account
+required. The build is signed with a Developer ID certificate but is not currently notarised by
+Apple, so on first launch macOS will say it cannot verify the developer: open **System Settings ▸
+Privacy & Security**, find ConceptMapper under *Security*, and choose **Open Anyway**. That is a
+one-time step. There is no auto-updater; to update, download the latest DMG and
 replace the app. See **[What's New](https://conceptmapper.dromologue.com/changelog.html)** for
 release notes.
 

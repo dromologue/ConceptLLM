@@ -30,7 +30,7 @@ const APP_ICON = resolve(
 
 const META = {
   appName: "Concept Mapper",
-  version: "1.3",
+  version: "1.3.1",
   contact: "dromologue@gmail.com",
   effectiveDate: "31 May 2026",
   // Direct download: a free, notarised Developer ID DMG hosted on fly.io.
@@ -348,7 +348,7 @@ function buildHome() {
   const cta = `<a class="btn" href="${META.brandedDownloadUrl}">Download for Mac</a>`;
 
   const heroLede = `${META.appName} is a tool for building, editing, and reasoning over concept maps where every node and edge has a type. Maps are plain-text Markdown; the schema they obey lives in a separate template. Your thinking stays portable, greppable, and yours.`;
-  const req = `Requires ${META.minOS} or later. Open the disk image and drag ${META.appName} to your Applications folder.`;
+  const req = `Requires ${META.minOS} or later. Open the disk image and drag ${META.appName} to your Applications folder. On first launch, macOS will say it cannot verify the developer: open System Settings ▸ Privacy &amp; Security, find ${META.appName} under Security, and choose Open Anyway. You only need to do this once.`;
 
   const hero = `
     <section class="hero">
@@ -390,7 +390,7 @@ function buildHome() {
     <section class="platforms">
       <div class="wrap">
         <h2>Built for the Mac.</h2>
-        <p>${META.appName} is a native macOS app for ${META.minOS} and later, distributed as a free, notarised direct download — no App Store account required. Your <code>.cm</code> maps and <code>.cmt</code> templates are ordinary files on your own Mac: greppable, version-controllable, and yours to keep.</p>
+        <p>${META.appName} is a native macOS app for ${META.minOS} and later, distributed as a free direct download, signed with an Apple Developer ID — no App Store account required. Your <code>.cm</code> maps and <code>.cmt</code> templates are ordinary files on your own Mac: greppable, version-controllable, and yours to keep.</p>
       </div>
     </section>`;
 

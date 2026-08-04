@@ -30,14 +30,14 @@ export function parse_markdown_to_json(input) {
 function __wbg_get_imports() {
     const import0 = {
         __proto__: null,
-        __wbg___wbindgen_throw_1506f2235d1bdba0: function(arg0, arg1) {
+        __wbg___wbindgen_throw_344f42d3211c4765: function(arg0, arg1) {
             throw new Error(getStringFromWasm0(arg0, arg1));
         },
-        __wbg_getTime_00b3f7db575e4ef5: function(arg0) {
+        __wbg_getTime_d6f070c088c9b5ed: function(arg0) {
             const ret = arg0.getTime();
             return ret;
         },
-        __wbg_new_0_445c13a750296eb6: function() {
+        __wbg_new_0_3da9e97f24fc69be: function() {
             const ret = new Date();
             return ret;
         },

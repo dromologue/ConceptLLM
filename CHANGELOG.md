@@ -2,6 +2,14 @@
 
 Plain-English notes on what has changed in each release. Newest first.
 
+## 1.3.1 — 4 August 2026
+
+A maintenance release. Nothing changes in how the app looks or works.
+
+- **Updated internals.** The libraries Concept Mapper is built on have been brought up to date, including security fixes to components used when building the app.
+- **Faster, tidier build.** Housekeeping to the build and test tooling. Your maps, templates, and settings are untouched.
+- **One extra step on first launch.** This build is signed with an Apple Developer ID but has not been through Apple's notary service, so macOS will say it cannot verify the developer the first time you open it. Open System Settings ▸ Privacy & Security, find Concept Mapper under Security, and choose Open Anyway. You only need to do this once.
+
 ## 1.3 — 19 June 2026
 
 This release moves Concept Mapper to a direct download and opens up the source.

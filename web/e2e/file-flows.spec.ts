@@ -48,7 +48,10 @@ test.describe("iOS file features (web side)", () => {
     await page.waitForTimeout(800); // let the simulation paint a frame
 
     for (const fmt of ["PNG", "PDF"]) {
-      await page.locator('[title="Export Image"]').click();
+      // Export Image lives in the Advanced Tools flyout, which closes on select,
+      // so it is reopened for each format.
+      await page.locator('[title="Advanced Tools"]').click();
+      await page.getByRole("button", { name: "Export Image" }).click();
       await page.getByRole("button", { name: fmt, exact: true }).click();
       await page.getByRole("button", { name: "Export", exact: true }).click();
       await page.waitForTimeout(200);

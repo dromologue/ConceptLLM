@@ -64,7 +64,7 @@ institutional_base: Harvard Business School";
         node.fields.get("institutional_base").map(|s| s.as_str()),
         Some("Harvard Business School")
     );
-    assert!(node.fields.get("key_concept_ids").is_some());
+    assert!(node.fields.contains_key("key_concept_ids"));
 }
 
 // AC-003-13: Stacey example parses correctly
@@ -350,8 +350,8 @@ parent_concept_id: cynefin";
         node.fields.get("parent_concept_id").map(|s| s.as_str()),
         Some("cynefin")
     );
-    assert!(node.fields.get("generation").is_none());
-    assert!(node.fields.get("stream").is_none());
+    assert!(!node.fields.contains_key("generation"));
+    assert!(!node.fields.contains_key("stream"));
 }
 
 // Edge case: missing optional notes field defaults to None
